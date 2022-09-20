@@ -9,18 +9,13 @@ html,body{margin:0;overflow:hidden}
     #map {height: 100%;width: 100%;}
 </style>
 <script>
-function initMap() {
-  const uluru = {lat:-25.344,lng:131.031};
+
+window.initMap = function initMap() {
+  const loc = {lat:22.383381,lng:114.198517};
   const map = new google.maps.Map(document.getElementById("map"), {
-    zoom: 5,
-    center: uluru,
-  });
-  const marker = new google.maps.Marker({
-    position: uluru,
-    map: map,
-  });
-}
-window.initMap = initMap;
+    zoom:11.7,center:{lat:22.3699,lng:114.1144}});
+  const marker = new google.maps.Marker({position:loc,map:map});
+};
 
 </script>
 </html>
