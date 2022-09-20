@@ -1,0 +1,280 @@
+<head></head>
+<body>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+tr{
+    height: 30vh;
+}
+canvas{
+    height: 100%;
+}
+</style>
+
+<table>
+<tr>
+    <td><div class="chart-container"style="position:relative;height:30vw;width:30vw"><canvas id="1"></canvas></div></td>
+    <td><div class="chart-container"style="position:relative;height:30vw;width:30vw"><canvas id="2"></canvas></div></td>
+    <td><div class="chart-container"style="position:relative;height:30vw;width:30vw"><canvas id="3"></canvas></div></td>
+</tr>
+<tr>
+    <td><div class="chart-container"style="position:relative;height:30vw;width:30vw"><canvas id="4"></canvas></div></td>
+    <td><div class="chart-container"style="position:relative;height:30vw;width:30vw"><canvas id="5"></canvas></div></td>
+    <td><div class="chart-container"style="position:relative;height:30vw;width:30vw"><canvas id="6"></canvas></div></td>
+</tr>
+<tr>
+    <td><div class="chart-container"style="position:relative;height:30vw;width:30vw"><canvas id="7"></canvas></div></td>
+    <td><div class="chart-container"style="position:relative;height:30vw;width:30vw"><canvas id="8"></canvas></div></td>
+    <td><div class="chart-container"style="position:relative;height:30vw;width:30vw"><canvas id="9"></canvas></div></td>
+</tr>
+</table>
+
+
+<script>
+
+const months = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December'
+];
+    const data = {
+      labels: [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+    ],
+      datasets: [{
+        label: 'My First dataset',
+        backgroundColor: 'rgb(255, 99, 132)',
+        borderColor: 'rgb(255, 99, 132)',
+        data: [0, 10, 5, 2, 20, 30, 45],
+      }]
+    };
+  
+    const config = {
+      type: 'line',
+      data: data,
+      options: {}
+    };
+
+const myChart = new Chart(document.getElementById('1'),config);
+const DATA_COUNT = 7;
+const NUMBER_CFG = {count: DATA_COUNT, min: -100, max: 100};
+const labels = months
+const data2 = {
+  labels: labels,
+  datasets: [
+    {
+      label: 'Fully Rounded',
+      data: [1,2,3],
+      borderColor: 'red',
+      backgroundColor: 'red',
+      borderWidth: 2,
+      borderRadius: Number.MAX_VALUE,
+      borderSkipped: false,
+    },
+    {
+      label: 'Small Radius',
+      data: [1,2,3],
+      borderColor: 'blue',
+      backgroundColor: 'blue',
+      borderWidth: 2,
+      borderRadius: 5,
+      borderSkipped: false,
+    }
+  ]
+};
+
+    const config2 = {
+  type: 'bar',
+  data: data2,
+  options: {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top',
+      },
+      title: {
+        display: true,
+        text: 'Chart.js Bar Chart'
+      }
+    }
+  },
+};
+const myChart2 = new Chart(document.getElementById('2'),config2);
+const config3 = {
+  type: 'bubble',
+  data:  {
+  labels: labels,
+  datasets: [
+    {
+      label: 'Dataset 1',
+      data:[[10,20,10],[30,40,20]],
+      backgroundColor: 'red',
+    },
+    {
+      label: 'Dataset 2',
+      data: [[50,60],[70,80]],
+      backgroundColor: 'orange',
+    }
+  ]
+}, options: {
+    responsive: true,
+    plugins: {
+      legend: {position:'top'},
+      title: {display:true,text:'Chart.js Bubble Chart'}
+    }
+  },
+};
+
+const myChart3 = new Chart(document.getElementById('3'),config3);
+const config4 = {
+  type: 'bar',
+  data:  {
+  labels: labels,
+  datasets: [
+    {
+      label: 'Dataset 1',
+      data: [10,20,30,40,50,60,70,80,90,100,120],
+      backgroundColor:'orange',
+      order: 1
+    },
+    {
+      label: 'Dataset 2',
+      data: [10,20,30,40,50,60,70,80,90,100,120],
+      backgroundColor: 'red',
+      type: 'line',
+      order: 0
+    }
+  ]
+},
+  options: {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top',
+      },
+      title: {
+        display: true,
+        text: 'Chart.js Combined Line/Bar Chart'
+      }
+    }
+  },
+};
+const myChart4 = new Chart(document.getElementById('4'),config4);
+var CHART_COLORS = {
+  red: 'rgb(255, 99, 132)',
+  orange: 'rgb(255, 159, 64)',
+  yellow: 'rgb(255, 205, 86)',
+  green: 'rgb(75, 192, 192)',
+  blue: 'rgb(54, 162, 235)',
+  purple: 'rgb(153, 102, 255)',
+  grey: 'rgb(201, 203, 207)'
+};
+const config5 = {
+  type: 'doughnut',
+  data: {
+  labels: ['Red', 'Orange', 'Yellow', 'Green', 'Blue'],
+  datasets: [
+    {
+      label: 'Dataset 1',
+      data: [10,20,30,40],
+      backgroundColor: Object.values(CHART_COLORS),
+    }
+  ]
+},
+  options: {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top',
+      },
+      title: {
+        display: true,
+        text: 'Chart.js Doughnut Chart'
+      }
+    }
+  },
+};
+const myChart5 = new Chart(document.getElementById('5'),config5);
+var numCount=1
+function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random()*(i + 1)*numCount);
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    numCount=numCount+1
+    return array
+}
+var data6=[5,10,15,15,5,10,25,20,10]
+const config6 = {
+  type: 'radar',
+  data:  {
+  labels: months,
+  datasets: [
+    {
+      label: 'D0',
+      data: shuffle(shuffle(data6)),
+      backgroundColor: 'red',
+    },
+    {
+      label: 'D1',
+      data: shuffle(data6),
+      backgroundColor: 'orange',
+    },
+    {
+      label: 'D2',
+      data: shuffle(data6),
+      backgroundColor: 'yellow',
+    },
+    {
+      label: 'D3',
+      data:  shuffle(data6),
+      backgroundColor:'green',
+    },
+    {
+      label: 'D4',
+      data:  shuffle(data6),
+      backgroundColor: 'blue',
+    },
+    {
+      label: 'D5',
+      data:  shuffle(data6),
+      backgroundColor:'purple',
+    },
+    {
+      label: 'D6',
+      data:  shuffle(data6),
+      backgroundColor: 'grey',
+    }
+  ]
+},
+  options: {
+    plugins: {
+      filler: {
+        propagate: false
+      },
+      'samples-filler-analyser': {
+        target: 'chart-analyser'
+      }
+    },
+    interaction: {
+      intersect: false
+    }
+  }
+};
+const myChart6 = new Chart(document.getElementById('6'),config6);
+
+  </script>
+</body>
