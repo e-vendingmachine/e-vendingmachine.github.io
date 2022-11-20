@@ -61,6 +61,7 @@ p{color: grey;    display: inline;}
   background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='25' height='25' viewBox='0 0 25 25' fill-rule='evenodd'%3E%3Cpath d='M16.036 18.455l2.404-2.405 5.586 5.587-2.404 2.404zM8.5 2C12.1 2 15 4.9 15 8.5S12.1 15 8.5 15 2 12.1 2 8.5 4.9 2 8.5 2zm0-2C3.8 0 0 3.8 0 8.5S3.8 17 8.5 17 17 13.2 17 8.5 13.2 0 8.5 0zM15 16a1 1 0 1 1 2 0 1 1 0 1 1-2 0'%3E%3C/path%3E%3C/svg%3E") center / contain no-repeat;
 }
 #search input{
+  width: 20vw;
 padding: 10px 30px;
 border: none;
 background-color: #F2F2F2;
@@ -110,6 +111,17 @@ h3{float: right}
   margin-right: auto;
   padding-left:20%;
 }
+#center{
+  width: 100%;
+}
+.dark *,.dark button{
+  background-color: #202124 !important;
+  color:white !important;
+}
+.dark svg{
+  stroke: white;
+}
+
 </style>
 
 <table id=page><tr><td>
@@ -211,15 +223,15 @@ Mail
         <path d="M17 17h-11v-14h-2" />
         <path d="M6 5l14 1l-1 7h-13" />
       </svg>
-      Shopping Cart Test
+      Shopping Cart
 </button>
 </section>
 
-</td><td>
+</td><td id=center>
 
    
         <section id=topbar>
-        <button>
+        <button id=a>
             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-layout-sidebar" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
                 <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                 <rect x="4" y="4" width="16" height="16" rx="2" />
@@ -240,7 +252,7 @@ Mail
             <label id=search>
                 <input type="text" placeholder="Search">
               </label>
-              <button>
+              <button id=c>
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-sun" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                     <circle cx="12" cy="12" r="4" />
@@ -261,7 +273,7 @@ Mail
                     <path d="M9 17v1a3 3 0 0 0 6 0v-1" />
                   </svg>
               </button>
-        <button>
+        <button id=b>
             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-layout-sidebar-right" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
                 <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                 <rect x="4" y="4" width="16" height="16" rx="2" />
@@ -361,11 +373,7 @@ Mail
 </article>
 
 
-
-
 </main>
-
-
 
 
 </td><td>
@@ -440,12 +448,16 @@ You might like... for 52%
 
 </td></tr></table>
 
-
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+
 <script>
+  $('#a').click(function(){$('#sidebar').toggle("slide",{direction:'left'})})
+  $('#b').click(function(){$('#rightbar').toggle()})
+  $('#c').click(function(){$('html').toggleClass('dark')})
     const months = [
   'January',
   'February',
