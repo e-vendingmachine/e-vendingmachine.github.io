@@ -1,95 +1,537 @@
-<head>
-  <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
-  <script src="https://cdn.amcharts.com/lib/5/map.js"></script>
-  <script src="https://cdn.amcharts.com/lib/5/geodata/hongKongHigh.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <script src='https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js'></script> 
-</head>
-<body>
-<aside id=info>
-
-<h1 id=title></h1>
-<img>
-<a id=address></a>
-
-</aside>
-<div id="chartdiv"></div>
-
-
-</body>
 <style>
-html,body{margin:0;overflow:hidden}
-#info{
-display: none;
-overflow: hidden;
-float: right;
-position: fixed;
-z-index: 1;
-width: 25%;
-background-image:linear-gradient(to left,black,rgba(0, 0, 0, 0.7));
-color: white;
-top:0;
-bottom:0;
-backdrop-filter: blur(10px);
-right: 0;
+html,body{margin:0;width: auto;position: relative;}
+#page2,#page3{display:none}
+iframe{width:100%;height:100%;border:0;}
+#sidebar{
+    flex-direction: column;
+    top: 0;
+    padding: 0 10px;
+    box-sizing: border-box;
+    white-space: break-spaces;
+    width: min-content;
+    border-right: 1px solid lightgrey;
+    z-index: 10;
+    min-width: fit-content;
+    height: 100%;
 }
-h1{
-  text-align: center;
+#sidebar button,#topbar button,#rightbar button{
+    white-space: nowrap;
+    font-size: 12px;
+    padding: 8px;
+    margin: 0;
+    border: 0;
+    background-color: white;
+    border-radius:5px ;
+    width: max-content;
 }
-#info img{
-  width: 95%;
-  display: block;
-  margin-left: auto;
+#sidebar svg, #topbar svg,#rightbar svg{
+    vertical-align:middle;
+    height: 20px;
+}
+#eppl{width: 15vh;}
+main{
+    position: relative;
+    float: left;
+    width: auto;
+    height: 100%;
+}
+
+#topbar{
+    border-bottom:1px solid lightgrey;
+    z-index: 5;
+    width: auto;
+    overflow-x: hidden;
+    align-items: center;
+    padding-top: 5vh;
+    padding-bottom: 1vh;
+
+}
+p{color: grey;    display: inline;}
+.righty{float: right}
+
+#search { position: relative}
+
+#search:before {
+  content: "";
+  position: absolute;
+  left: 10px;
+  top: 0;
+  bottom: 0;
+  width: 20px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='25' height='25' viewBox='0 0 25 25' fill-rule='evenodd'%3E%3Cpath d='M16.036 18.455l2.404-2.405 5.586 5.587-2.404 2.404zM8.5 2C12.1 2 15 4.9 15 8.5S12.1 15 8.5 15 2 12.1 2 8.5 4.9 2 8.5 2zm0-2C3.8 0 0 3.8 0 8.5S3.8 17 8.5 17 17 13.2 17 8.5 13.2 0 8.5 0zM15 16a1 1 0 1 1 2 0 1 1 0 1 1-2 0'%3E%3C/path%3E%3C/svg%3E") center / contain no-repeat;
+}
+#search input{
+padding: 10px 30px;
+border: none;
+background-color: #F2F2F2;
+border-radius: 5px;
+}
+#rightbar{
+    height: 100%;
+    border-left: 1px solid lightgrey;
+    z-index: 8;
+    white-space: break-spaces;
+    padding: 0 10px;
+
+}
+
+#page{height:100%;width:100%;margin: 0;padding: 0;}
+#page td:nth-child(3){width:5%;}
+#sidebar,main,#rightbar{width:100%}
+#sidebar button:hover,#topbar button:hover,#rightbar button:hover{
+    background-color: lightgrey;
+    cursor: pointer;
+}
+#rightbar svg{
+float: left;
+}
+img[src="user.jpg"]{
+    width: 30px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+article{
+    background-color: #E3F5FF;
+    border-radius: 5px;
+    width: 20%;
+    margin: 1%;
+    padding: 10px;
+    display: inline-block;
+    height: 8%;
+}
+h2,h3{display: inline}
+article svg{float: right}
+h1,h2,h3{line-height:0;}
+h3{float: right}
+#chart,#map,#beverage,#doughnut{height:15vw;width:30vw}
+#doughnut div{
+    display: block;
+    margin-left: auto;
   margin-right: auto;
+  padding-left:20%;
 }
 </style>
+
+<table id=page><tr><td>
+
+    
+<section id=sidebar>
+    <img id=eppl src=epeople.png>
+E-People
+<br><br><br>
+<button><pre><img src=user.jpg>   Will LOK</pre></button>
+
+<button>
+    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <polyline points="5 12 3 12 12 3 21 12 19 12" />
+        <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+        <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+      </svg>
+    Home
+</button>
+<button>
+    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-dashboard" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <circle cx="12" cy="13" r="2" />
+        <line x1="13.45" y1="11.55" x2="15.5" y2="9.5" />
+        <path d="M6.4 20a9 9 0 1 1 11.2 0z" />
+      </svg>
+    Dashboard
+</button>
+<button>
+    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mail" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <rect x="3" y="5" width="18" height="14" rx="2" />
+        <polyline points="3 7 12 13 21 7" />
+      </svg>
+      Mail
+</button>
+<br><br>
+Dashboards
+<button>
+    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-settings-automation" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <path d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z" />
+        <path d="M10 9v6l5 -3z" />
+      </svg>
+    E-Vending Machine
+</button>
+<button>
+    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-bell-ringing" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <path d="M10 5a2 2 0 0 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6" />
+        <path d="M9 17v1a3 3 0 0 0 6 0v-1" />
+        <path d="M21 6.727a11.05 11.05 0 0 0 -2.794 -3.727" />
+        <path d="M3 6.727a11.05 11.05 0 0 1 2.792 -3.727" />
+      </svg>
+      Notifications
+</button>
+<button>
+    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-player-skip-forward" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <path d="M4 5v14l12 -7z" />
+        <line x1="20" y1="5" x2="20" y2="19" />
+      </svg>
+      Recommendation
+</button>
+<br><br>
+Mail
+<button>
+    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <circle cx="12" cy="7" r="4" />
+        <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+      </svg>
+      Account
+</button>
+<button>
+    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-eye" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <circle cx="12" cy="12" r="2" />
+        <path d="M22 12c-2.667 4.667 -6 7 -10 7s-7.333 -2.333 -10 -7c2.667 -4.667 6 -7 10 -7s7.333 2.333 10 7" />
+      </svg>
+      Overview
+</button>
+<button>
+    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-bell-ringing" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <path d="M10 5a2 2 0 0 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6" />
+        <path d="M9 17v1a3 3 0 0 0 6 0v-1" />
+        <path d="M21 6.727a11.05 11.05 0 0 0 -2.794 -3.727" />
+        <path d="M3 6.727a11.05 11.05 0 0 1 2.792 -3.727" />
+      </svg>
+      Notififications
+</button>
+<button>
+    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-shopping-cart" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <circle cx="6" cy="19" r="2" />
+        <circle cx="17" cy="19" r="2" />
+        <path d="M17 17h-11v-14h-2" />
+        <path d="M6 5l14 1l-1 7h-13" />
+      </svg>
+      Shopping Cart Test
+</button>
+</section>
+
+</td><td>
+
+   
+        <section id=topbar>
+        <button>
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-layout-sidebar" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <rect x="4" y="4" width="16" height="16" rx="2" />
+                <line x1="9" y1="4" x2="9" y2="20" />
+              </svg>
+        </button>
+        <button>
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-star" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z" />
+              </svg>
+        </button>
+        
+         <p>Home /</p> Dashboard
+        
+        <div class=righty>
+            
+            <label id=search>
+                <input type="text" placeholder="Search">
+              </label>
+              <button>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-sun" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                    <circle cx="12" cy="12" r="4" />
+                    <path d="M3 12h1m8 -9v1m8 8h1m-9 8v1m-6.4 -15.4l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7" />
+                  </svg>
+              </button>
+              <button>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                    <circle cx="12" cy="12" r="9" />
+                    <polyline points="12 7 12 12 15 15" />
+                  </svg>
+              </button>
+              <button>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-bell" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                    <path d="M10 5a2 2 0 0 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6" />
+                    <path d="M9 17v1a3 3 0 0 0 6 0v-1" />
+                  </svg>
+              </button>
+        <button>
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-layout-sidebar-right" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <rect x="4" y="4" width="16" height="16" rx="2" />
+                <line x1="15" y1="4" x2="15" y2="20" />
+              </svg>
+        </button>
+        </div>
+        </section>
+        <main>
+            <br><b>E-vending Machine</b><br>
+<article>
+    <h1>Users</h1><h2>1,481,508</h2><h3>+3.42%</h3>
+    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trending-up" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#00b341" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <polyline points="3 17 9 11 13 15 21 7" />
+        <polyline points="14 7 21 7 21 14" />
+      </svg>
+</article>
+<article>
+    <h1>Orders</h1><h2>2,812</h2><h3>+6.88%</h3>
+    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trending-up" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#00b341" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <polyline points="3 17 9 11 13 15 21 7" />
+        <polyline points="14 7 21 7 21 14" />
+      </svg>
+</article>
+<article>
+    <h1>Growth</h1><h2>24.2%</h2><h3>-4.23%</h3> 
+    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trending-down" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ff2825" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <polyline points="3 7 9 13 13 9 21 17" />
+        <polyline points="21 10 21 17 14 17" />
+      </svg>
+</article>
+<article>
+    <h1>Products</h1><h2>593</h2><h3>+16.25%</h3>
+    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trending-up" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#00b341" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <polyline points="3 17 9 11 13 15 21 7" />
+        <polyline points="14 7 21 7 21 14" />
+      </svg>
+</article>
+<article id=chart>
+   <div class="chart-container"style="position:relative;height:30vw;width:30vw"><canvas id="4"></canvas></div>
+</article>
+<article id=map>
+    <iframe src=index2.html></iframe>
+</article>
+
+<article id=beverage >
+    <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Gatorade Orange Sports Drink 0.5L</td>
+            <td>$9.50</td>
+            <td>593.231</td>
+            <td>$5,635,694,5</td>
+          </tr>
+          <tr>
+            <td>Coca Cola Classic 0.5L</td>
+            <td>$8.00</td>
+            <td>832,852</td>
+            <td>$6,662,816.0</td>
+          </tr>
+          <tr>
+            <td>Vitasoy Original Soy Milk 0.25L</td>
+            <td>$6.00</td>
+            <td>621,425</td>
+            <td>$3,728,550.0</td>
+          </tr>
+          <tr>
+            <td>Nestle Coffee Classic 0.375L</td>
+            <td>$15.00</td>
+            <td>376,203</td>
+            <td>$5,643,045.0</td>
+          </tr>
+          <tr>
+            <td>Vita Lemon Tea 0.5L</td>
+            <td>$9.00</td>
+            <td>731,225</td>
+            <td>$6,581,025.0</td>
+          </tr>
+        </tbody>
+</table>
+</article>
+
+<article id=doughnut>
+    <div class="chart-container"style="position:relative;height:15vw;width:30vw"><canvas id="5"></canvas></div>
+</article>
+
+
+
+
+</main>
+
+
+
+
+</td><td>
+    
+<section id=rightbar>    
+<b>Notifications</b>    
+<button>
+<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-building-store" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+<path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+<line x1="3" y1="21" x2="21" y2="21" />
+<path d="M3 7v1a3 3 0 0 0 6 0v-1m0 1a3 3 0 0 0 6 0v-1m0 1a3 3 0 0 0 6 0v-1h-18l2 -4h14l2 4" />
+<line x1="5" y1="21" x2="5" y2="10.85" />
+<line x1="19" y1="21" x2="19" y2="10.85" />
+<path d="M9 21v-4a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v4" />
+</svg>
+Check new product from...
+<p>5m ago</p>
+</button>
+<button>
+<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-plus" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+<path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+<circle cx="9" cy="7" r="4" />
+<path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+<path d="M16 11h6m-3 -3v6" />
+</svg>
+New user registered  <p>1:23 AM</p>
+</button>
+<button>
+<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-discount-2" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+<path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+<line x1="9" y1="15" x2="15" y2="9" />
+<circle cx="9.5" cy="9.5" r=".5" fill="currentColor" />
+<circle cx="14.5" cy="14.5" r=".5" fill="currentColor" />
+<path d="M5 7.2a2.2 2.2 0 0 1 2.2 -2.2h1a2.2 2.2 0 0 0 1.55 -.64l.7 -.7a2.2 2.2 0 0 1 3.12 0l.7 .7a2.2 2.2 0 0 0 1.55 .64h1a2.2 2.2 0 0 1 2.2 2.2v1a2.2 2.2 0 0 0 .64 1.55l.7 .7a2.2 2.2 0 0 1 0 3.12l-.7 .7a2.2 2.2 0 0 0 -.64 1.55v1a2.2 2.2 0 0 1 -2.2 2.2h-1a2.2 2.2 0 0 0 -1.55 .64l-.7 .7a2.2 2.2 0 0 1 -3.12 0l-.7 -.7a2.2 2.2 0 0 0 -1.55 -.64h-1a2.2 2.2 0 0 1 -2.2 -2.2v-1a2.2 2.2 0 0 0 -.64 -1.55l-.7 -.7a2.2 2.2 0 0 1 0 -3.12l.7 -.7a2.2 2.2 0 0 0 .64 -1.55v-1" />
+</svg>
+Promotion! 20% discount for... <p>0:32 AM</p>
+</button>
+<button>
+<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-friends" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+<path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+<circle cx="7" cy="5" r="2" />
+<path d="M5 22v-5l-1 -1v-4a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4l-1 1v5" />
+<circle cx="17" cy="5" r="2" />
+<path d="M15 22v-4h-2l2 -6a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1l2 6h-2v4" />
+</svg>
+Zac, Yanho, Sally subscribe...
+<p>Yesterday 12:39 AM</p>
+</button>
+<br><br>
+<b>Recommendation</b>
+<button>
+<img src=user.jpg>
+You might like... for 76%
+<p>Vitasoy Original Soy Milk</p>
+</button>
+<button>
+<img src=user.jpg>
+You might like... for 66%
+<p>Vitasoy Original Soy Milk</p>
+</button>
+<button>
+<img src=user.jpg>
+You might like... for 58%
+<p>Vitasoy Original Soy Milk</p>
+</button>
+<button>
+<img src=user.jpg>
+You might like... for 52%
+<p>Vitasoy Original Soy Milk</p>
+</button>
+</section>
+
+</td></tr></table>
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
 <script>
-var root = am5.Root.new("chartdiv"); 
-var chart = root.container.children.push(
-am5map.MapChart.new(root,{panX:"rotateX",projection:am5map.geoMercator()})
-);
+    const months = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December'
+];
+const config4 = {
+  type: 'bar',
+  data:  {
+  labels: months,
+  datasets: [
+    {
+      label: 'Customer Amount',
+      data: [10,20,30,40,50,60,70,80,90,100,120],
+      backgroundColor:'orange',
+      order: 1
+    },
+    {
+      label: 'Increase Rate',
+      data: [10,20,30,40,50,60,70,80,90,100,120],
+      backgroundColor: 'red',
+      type: 'line',
+      order: 0
+    }
+  ]
+},
+options: {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top',
+      },
+      title: {
+        display: true,
+        text: 'Customer Increase Rate'
+      }
+    }
+  },
+};
+const myChart4 = new Chart(document.getElementById('4'),config4);
+$(document).ready( function () {
+    $('#beverage table').DataTable();
+} );
 
-var hk=chart.series.push(am5map.MapPolygonSeries.new(root,{geoJSON:am5geodata_hongKongHigh}));
+var CHART_COLORS = {
+  red: 'rgb(255, 99, 132)',
+  orange: 'rgb(255, 159, 64)',
+  yellow: 'rgb(255, 205, 86)',
+  green: 'rgb(75, 192, 192)',
+  blue: 'rgb(54, 162, 235)',
+  purple: 'rgb(153, 102, 255)',
+  grey: 'rgb(201, 203, 207)'
+};
 
-var pointSeries = chart.series.push(am5map.MapPointSeries.new(root,{
-  latitudeField:"lat",longitudeField:"long"}));
-
-pointSeries.data.setAll([{
-  name:'Vending Machine#1',
-  lat:22.383381,long:114.198517,
-  img:'https://www.cedars.hku.hk/image/cache/data/1516353350_VM1-620x413.jpg'
-},{
-  name:'Vending Machine#2',
-  lat:22.308900,long:114.177741,
-  img:'https://upload.wikimedia.org/wikipedia/commons/8/83/Swire_Coca-Cola_Hong_Kong_vending_Machine_20111026.jpg'
-},{
-  name:'Vending Machine#3',
-  lat:22.443212,long:114.026291,
-  img:'https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Vending_machines%2C_Hong_Kong_Baptist_University.JPG/2560px-Vending_machines%2C_Hong_Kong_Baptist_University.JPG'
-}]);
-
-hk.events.on("click", function(e){
-  console.log( e.target.dataItem)
-
- if ($('#info').is(':visible')&&typeof e.target.dataItem == "undefined") $('#info').toggle("slide",{direction:'right'})
-
-})
-pointSeries.bullets.push(function() {
-  var circle = am5.Circle.new(root,{
-    radius:5,fill:'rgba(255,0,0,0.8)',tooltipText:"{name}"});
-
-circle.events.on("click", function(e){
-obj=e.target.dataItem.dataContext
-if ($('#info').is(':visible')) $('#info').toggle("slide",{direction:'right'},function(){change()})
-
-else change()
-function change(){
-console.log(obj.name);
-$('#info #title').text(obj.name)
-$('#info img').attr('src',obj.img);
-$('#info').toggle("slide",{direction:'right'}) }
-  });
-  return am5.Bullet.new(root,{sprite: circle});
-
-});
+const config5 = {
+  type: 'doughnut',
+  data: {
+  labels: ['0-18', '19-35', '36-49', '50+'],
+  datasets: [
+    {
+      label: 'Dataset 1',
+      data: [26.7,30.8,30.2,12.3],
+      backgroundColor: Object.values(CHART_COLORS),
+    }
+  ]
+},
+  options: {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top',
+      },
+      title: {
+        display: true,
+        text: 'Age proportion'
+      }
+    }
+  },
+};
+const myChart5 = new Chart(document.getElementById('5'),config5);
 </script>

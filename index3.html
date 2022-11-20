@@ -3,31 +3,33 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <style>
+html,body{margin:0;}
 tr{
     height: 30vh;
 }
 canvas{
     height: 100%;
 }
+#page2,#page3{
+  display: none;
+}
+iframe{width: 100%;height: 100%e;}
 </style>
+    <table>
+      <tr>
+          <td><div class="chart-container"style="position:relative;height:30vw;width:30vw"><canvas id="1"></canvas></div></td>
+          <td><div class="chart-container"style="position:relative;height:30vw;width:30vw"><canvas id="2"></canvas></div></td>
+          <td><div class="chart-container"style="position:relative;height:30vw;width:30vw"><canvas id="3"></canvas></div></td>
+      </tr>
+      <tr>
+          <td><div class="chart-container"style="position:relative;height:30vw;width:30vw"><canvas id="4"></canvas></div></td>
+          <td><div class="chart-container"style="position:relative;height:30vw;width:30vw"><canvas id="5"></canvas></div></td>
+          <td><div class="chart-container"style="position:relative;height:30vw;width:30vw"><canvas id="6"></canvas></div></td>
+      </tr>
+      </table>
+   
 
-<table>
-<tr>
-    <td><div class="chart-container"style="position:relative;height:30vw;width:30vw"><canvas id="1"></canvas></div></td>
-    <td><div class="chart-container"style="position:relative;height:30vw;width:30vw"><canvas id="2"></canvas></div></td>
-    <td><div class="chart-container"style="position:relative;height:30vw;width:30vw"><canvas id="3"></canvas></div></td>
-</tr>
-<tr>
-    <td><div class="chart-container"style="position:relative;height:30vw;width:30vw"><canvas id="4"></canvas></div></td>
-    <td><div class="chart-container"style="position:relative;height:30vw;width:30vw"><canvas id="5"></canvas></div></td>
-    <td><div class="chart-container"style="position:relative;height:30vw;width:30vw"><canvas id="6"></canvas></div></td>
-</tr>
-<tr>
-    <td><div class="chart-container"style="position:relative;height:30vw;width:30vw"><canvas id="7"></canvas></div></td>
-    <td><div class="chart-container"style="position:relative;height:30vw;width:30vw"><canvas id="8"></canvas></div></td>
-    <td><div class="chart-container"style="position:relative;height:30vw;width:30vw"><canvas id="9"></canvas></div></td>
-</tr>
-</table>
+
 
 
 <script>

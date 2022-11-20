@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Bill[
+    <!ELEMENT Bill (branch_id, cso, date, delivery, display, items, ord_num, payment, region, sub_total, takeaway, takeaway_total, time)>
+    <!ELEMENT branch_id (#PCDATA)>
+    <!ELEMENT cso (#PCDATA)>
+    <!ELEMENT date (#PCDATA)>
+    <!ELEMENT delivery (#PCDATA)>
+    <!ELEMENT display (#PCDATA)>
+    <!ELEMENT items (item+)>
+    <!ELEMENT item (no_sause, no_vegetables, price, product, product_id, quantity, special, no_fruit)>
+	<!ATTLIST item CDATA "true" no_sause CDATA "false">
+    <!ATTLIST item CDATA "true" no_vegetables CDATA "false">
+    <!ELEMENT price (#PCDATA)>
+    <!ELEMENT product (#PCDATA)>
+    <!ELEMENT product_id (#PCDATA)>
+    <!ELEMENT quantity (#PCDATA)>
+    <!ELEMENT special (#PCDATA)>
+    <!ATTLIST item CDATA "true" no_fruit CDATA "false">
+    <!ELEMENT ord_num (#PCDATA)>
+    <!ELEMENT payment (amount, balance, card_id, last_topup, machine_id, method, payment_id)>
+    <!ELEMENT amount (#PCDATA)>
+    <!ELEMENT balance (#PCDATA)>
+    <!ELEMENT card_id (#PCDATA)>
+    <!ELEMENT last_topup (#PCDATA)>
+    <!ELEMENT machine_id (#PCDATA)>
+    <!ELEMENT method (#PCDATA)>
+    <!ELEMENT payment_id (#PCDATA)>
+    <!ELEMENT region (#PCDATA)>
+    <!ELEMENT sub_total (#PCDATA)>
+    <!ELEMENT takeaway (CDATA )>
+    <!ELEMENT takeaway_total (#PCDATA)>
+    <!ELEMENT time (#PCDATA)>
+        ] >
+<!--Bill from Mcdonalds ordering a meal-->
+<!--Element order been arranged alphabetically-->
+<Bill>
+	<branch_id>136</branch_id>
+	<cso>42</cso>
+	<!--CSO stands for Contrail Service Orchestration-->
+	<date>29/10/2022</date>
+	<delivery>false</delivery>
+	<!--Boolean for order to be deliver to address-->
+	<display>screen_1</display>
+	<!--Screen group / Counter category to display the order id for-->
+	<items>
+		<item>
+			<no_sause>false</no_sause>
+			<!--Exclude salad sause from hamberger-->
+			<no_vegetables>false</no_vegetables>
+			<!--Exclude vegetables sause from hamberger-->
+			<price>41.00</price>
+			<product>大大啖脆雞巨無霸套餐</product>
+			<product_id>ab12</product_id>
+			<!--4 digit hex ID for product-->
+			<quantity>1</quantity>
+			<special>false</special>
+			<!--Boolean for special needs for customer-->
+		</item>
+		<item>
+			<no_sugar>false</no_sugar>
+			<product>餐大薯條</product>
+			<product_id>cd34</product_id>
+			<!--4 digit hex ID for product-->
+			<quantity>1</quantity>
+			<special>false</special>
+			<!--Boolean for special needs for customer-->
+		</item>
+		<item>
+			<product>調味粉</product>
+			<product_id>ef56</product_id>
+			<!--4 digit hex ID for product-->
+			<quantity>1</quantity>
+			<special>美式BBQ蜜糖</special>
+			<!--Boolean for special needs for customer-->
+		</item>
+		<item>
+			<ice>less</ice>
+			<no_fruit>false</no_fruit>
+			<product>餐橙汁雜飲</product>
+			<product_id>gh78</product_id>
+			<!--4 digit hex ID for product-->
+			<quantity>1</quantity>
+			<special>false</special>
+			<!--Boolean for special needs for customer-->
+		</item>
+	</items>
+	<ord_num>245</ord_num>
+	<payment>
+		<amount>41.00</amount>
+		<balance>19.90</balance>
+		<!--Remaining balance inside payment card-->
+		<card_id>1234567890</card_id>
+		<!--10 digit ID for octopus card id-->
+		<last_topup>2022-10-05</last_topup>
+		<machine_id>12345A</machine_id>
+		<!--6 digit ID for octopus card receiver machine-->
+		<method>octopus</method>
+		<payment_id>1234</payment_id>
+	</payment>
+	<region>hk</region>
+	<!--Region/Country this restaurant locate in-->
+	<sub_total>41.00</sub_total>
+	<takeaway>true</takeaway>
+	<takeaway_total>41.00</takeaway_total>
+	<time>22:15:47</time>
+</Bill>

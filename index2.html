@@ -6,15 +6,29 @@
   </body>
 <style>
 html,body{margin:0;overflow:hidden}
-    #map {height: 100%;width: 100%;}
+#map{height:100%;width:100%}
 </style>
 <script>
 
 window.initMap = function initMap() {
-  const loc = {lat:22.383381,lng:114.198517};
-  const map = new google.maps.Map(document.getElementById("map"), {
-    zoom:11.7,center:{lat:22.3699,lng:114.1144}});
-  const marker = new google.maps.Marker({position:loc,map:map});
+  const map = new google.maps.Map(document.getElementById("map"),{
+    zoom:10,center:{lat:22.3699,lng:114.1144}});
+var positions=[[22.383381,114.198517],
+[22.463781,114.257517],
+[22.493781,114.257517],
+[22.493781,114.357517],
+[22.367673,114.131050],
+[22.493781,114.107517],
+[22.393781,114.207517],
+[22.260136,113.964446],
+[22.249968,114.203559],
+[22.393781,114.207517],
+[22.383781,114.158517],
+[22.363181,114.198517],
+[22.393881,114.168517],]
+positions.forEach(e=>{
+  new google.maps.Marker({position:{lat:e[0],lng:e[1]},map:map});
+});
 };
 
 </script>
